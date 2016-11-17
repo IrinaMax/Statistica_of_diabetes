@@ -110,7 +110,7 @@ with(diabetPima, boxplot(dpf ~ class,
                          main = "Figure A",
                          ##  horizontal = TRUE,
                          outline = FALSE))
-
+                         
 # subsetting based on response
 with <- diabetPima[diabetPima$class == 1, ]
 without <- diabetPima[diabetPima$class == 0, ]
@@ -134,7 +134,7 @@ legend("topleft",
 # simple two sample t-test with unequal variance
 t.test(with$dpf, without$dpf)
 ```
-
+![fifurea_b_diabet](https://cloud.githubusercontent.com/assets/16123495/20382646/9baf6860-ac61-11e6-82e4-1c33718c7a40.png)
 Other plots such as boxplot or density plot can also be used to look at the difference in values of the variables between those with diabetes and those without. We can see from Figure B that the distribution to shifted towards the left for those without diabetes. This means those without diabetes generally have a lower blood glucose level.
 
 ```{r}
@@ -144,6 +144,11 @@ cor_melt
 cor_melt <- cor_melt[which(cor_melt$value > 0.3 & cor_melt$value != 1), ]
 cor_melt <- cor_melt[1:4, ]
 cor_melt
+##     Var1    Var2     value
+## 8    age    preg 0.5443412
+## 13 insul glucose 0.3313571
+## 29 insul triceps 0.4367826
+## 30  mass triceps 0.3925732
 ```
 
 We can also create a table of the correlations between the variables, and keep only those pairs with correlation values higher than 0.3. However, this is not a good indicator of correlations between the variables as there might be some other unknown interaction effects not taken into account to. 
@@ -172,16 +177,30 @@ y <- diabetPima$class
 # lasso regression also perform variable selection to determine which are the important variables
 par(mfrow = c(1, 1))
 fit.lasso.cv <- cv.glmnet(x[inTrain, ], y[inTrain], alpha = 1, family = "binomial")
+
 ```
 
 ```{r, echo=FALSE}
 plot(fit.lasso.cv)
 ```
-
+![fit_lasso_cv_diabet](https://cloud.githubusercontent.com/assets/16123495/20382640/9644a5f2-ac61-11e6-9d0b-30c605d3438b.png)
 ```{r}
 print(paste0("minimum binomial deviance = ", round(min(fit.lasso.cv$cvm), 3)))
+   ## [1] "minimum binomial deviance = 0.986"
 print(paste0("log(lambda) with minimum binomial deviance = ", round(log(fit.lasso.cv$lambda.min), 3)))
+   ## [1] "log(lambda) with minimum binomial deviance = -4.456"
 coef(fit.lasso.cv)
+## 9 x 1 sparse Matrix of class "dgCMatrix"
+##                        1
+## (Intercept) -5.955961689
+## preg         0.043911367
+## glucose      0.024986763
+## blpress      .          
+## triceps      .          
+## insul        .          
+## mass         0.055035437
+## dpf          0.368860689
+## age          0.006252545
 ```
 
 Pprediction with the validation data set
@@ -211,12 +230,23 @@ pred.glm.logistic <- predict(fit.glm, diabetPima[-inTrain, ])
 pred.glm <- exp(pred.glm.logistic) / (1 + exp(pred.glm.logistic))
 pred.glm <- as.integer(pred.glm >= 0.5)
 confusionMatrix(pred.glm, y[-inTrain])[2:3]
+## $table
+##           Reference
+## Prediction   0   1
+##          0 267  58
+##          1  50  99
+## 
+## $overall
+##       Accuracy          Kappa  AccuracyLower  AccuracyUpper   AccuracyNull 
+##   7.721519e-01   4.790043e-01   7.317009e-01   8.091687e-01   6.687764e-01 
+## AccuracyPValue  McnemarPValue 
+##   5.278874e-07   5.005814e-01
 par(mfrow = c(2, 2))
 ```
 ```{r, echo=FALSE}
 plot(fit.glm)
 ```
-
+![fit_glm_diabet](https://cloud.githubusercontent.com/assets/16123495/20382643/98ce2334-ac61-11e6-8c4f-d79c26bec2b1.png)
 Loading required package: lattice
 Loading required package: ggplot2
 Random forest. There are a handful of tuning parameters that can be adjusted to ensure a better fit using random forest, namely the mtry and ntree. However, I did not go into details on adjusting these parameters.
@@ -231,8 +261,31 @@ fit.rf <- randomForest(class ~ .,
                        importance = TRUE)
 pred.rf <- predict(fit.rf, diabetPima[-inTrain, ])
 confusionMatrix(pred.rf, y[-inTrain])[2:3]
+## $table
+##           Reference
+## Prediction   0   1
+##          0 252  49
+##          1  65 108
+## 
+## $overall
+##       Accuracy          Kappa  AccuracyLower  AccuracyUpper   AccuracyNull 
+##   0.7594936709   0.4707437952   0.7184123075   0.7973026259   0.6687763713 
+## AccuracyPValue  McnemarPValue 
+##   0.0000103941   0.1600573462
+
 importance(fit.rf)
+##                  0          1 MeanDecreaseAccuracy MeanDecreaseGini
+## preg     8.2860851 -3.7578081             5.385266         8.946319
+## glucose 28.2726316 23.8183621            34.853037        38.814502
+## blpress  0.5804179  1.1012853             1.185428        10.654958
+## triceps  0.8904373  0.9024279             1.234623         9.550938
+## insul    5.0094420  0.8933067             4.537233        10.690334
+## mass    10.6796934 12.2747294            15.194645        20.904031
+## dpf      7.8532795  3.0677422             7.678650        18.546117
+## age     10.5558052 11.4125002            15.626298        19.407760
+
 ```
+![fit_rf](https://cloud.githubusercontent.com/assets/16123495/20382636/9231ffd2-ac61-11e6-9bea-b7bf5962db59.png)
 ```{r, echo=FALSE}
 varImpPlot(fit.rf)
 ```
@@ -252,6 +305,7 @@ text(fit.tree, pretty = 0)
 text(fit.tree, pretty = 0)
 plot(fit.tree)
 ```
+![fit_tree_diabet](https://cloud.githubusercontent.com/assets/16123495/20382632/8f811f3e-ac61-11e6-84eb-d7ac1a345432.png)
 ```{r, echo=FALSE}
 plot(fit.tree)
 text(fit.tree, pretty = 0)
@@ -279,3 +333,4 @@ print(chaid.diabetes)
 ```{r, echo=FALSE}
 plot(chaid.diabetes, main = "CHAID tree diabetes incidents classification")
 ```
+![chaid_age_all](https://cloud.githubusercontent.com/assets/16123495/20382660/a467298e-ac61-11e6-983d-a4783daa2812.png)
