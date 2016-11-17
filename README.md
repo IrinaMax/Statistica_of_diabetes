@@ -130,6 +130,17 @@ legend("topleft",
 
 # simple two sample t-test with unequal variance
 t.test(with$dpf, without$dpf)
+## 
+##  Welch Two Sample t-test
+## 
+## data:  with$dpf and without$dpf
+## t = 4.5768, df = 454.51, p-value = 6.1e-06
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.06891135 0.17262065
+## sample estimates:
+## mean of x mean of y 
+##  0.550500  0.429734
 ```
 ![fifurea_b_diabet](https://cloud.githubusercontent.com/assets/16123495/20382646/9baf6860-ac61-11e6-82e4-1c33718c7a40.png)
 Other plots such as boxplot or density plot can also be used to look at the difference in values of the variables between those with diabetes and those without. We can see from Figure B that the distribution to shifted towards the left for those without diabetes. This means those without diabetes generally have a lower blood glucose level.
