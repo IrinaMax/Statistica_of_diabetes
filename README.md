@@ -97,7 +97,7 @@ hist(diabetPima$age)
 hist(diabetPima$glucose)
 hist(diabetPima$mass)
 ```
-
+![histograms_diabet](https://cloud.githubusercontent.com/assets/16123495/20382627/896be69c-ac61-11e6-8cf2-3ce467c28199.png)
 The graphs show some of the distributions of the variables. Age and number of times pregnant are not normal distributions as expected since the underlying population should not be normally distributed either. This 768 observations are just a sample of the original population. On the other hand, the glucose level and BMI seem to follow a normal distribution. When performing any analysis, it is always good to know what is the distribution of the data so all the assumptions for different tests or models can be met.
 
 ```{r, echo=FALSE}
