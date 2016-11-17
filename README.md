@@ -6,11 +6,11 @@ This is my statistical experimenting models using diabetes incidents
 > ##since the response output, with or without diabetes, is of a binary format (yes/no or true/false), and in this case, 1/0.
 > 
 > # file preview shows a header row
-> diabetPima <- read.csv("~/Desktop/Pima_diabet/Pima Indians Diabetes Binary Classification dataset.csv", header = TRUE)
+      diabetPima <- read.csv("~/Desktop/Pima_diabet/Pima Indians Diabetes Binary Classification dataset.csv", header = TRUE)
 > 
 > # first look at the data set using summary() and str() to understand what type of data are you working
 > # with
->     summary(diabetPima)
+      summary(diabetPima)
  Number.of.times.pregnant
  Min.   : 0.000          
  1st Qu.: 1.000          
@@ -46,7 +46,7 @@ This is my statistical experimenting models using diabetes incidents
  Mean   :0.4719             Mean   :33.24   Mean   :0.349          
  3rd Qu.:0.6262             3rd Qu.:41.00   3rd Qu.:1.000          
  Max.   :2.4200             Max.   :81.00   Max.   :1.000          
-> str(diabetPima)
+        str(diabetPima)
 'data.frame':	768 obs. of  9 variables:
  $ Number.of.times.pregnant                                                : int  6 1 8 1 0 5 3 10 2 8 ...
  $ Plasma.glucose.concentration.a.2.hours.in.an.oral.glucose.tolerance.test: int  148 85 183 89 137 116 78 115 197 125 ...
