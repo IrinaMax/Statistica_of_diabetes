@@ -47,10 +47,11 @@ This is my statistical experimenting models using diabetes incidents
  3rd Qu.:0.6262             3rd Qu.:41.00   3rd Qu.:1.000          
  Max.   :2.4200             Max.   :81.00   Max.   :1.000          
         str(diabetPima)
-'data.frame':	768 obs. of  9 variables:
- $ Number.of.times.pregnant : int  6 1 8 1 0 5 3 10 2 8 ...
- $ Plasma.glucose.concentration.a.2.hours.in.an.oral.glucose.tolerance.test: int  148 85 183 89 137 116 78 115 197 125 ...
- $ Diastolic.blood.pressure..mm.Hg.: int  35 29 0 23 35 0 32 0 45 0 ...
+	
+>'data.frame':	768 obs. of  9 variables:
+> $ Number.of.times.pregnant                                                : int  6 1 8 1 0 5 3 10 2 8 ...
+> $ Plasma.glucose.concentration.a.2.hours.in.an.oral.glucose.tolerance.test: int  148 85 183 89 137 116 78 115 197 125 ...
+ $ Diastolic.blood.pressure..mm.Hg.                                        : int  35 29 0 23 35 0 32 0 45 0 ...
  $ X2.Hour.serum.insulin..mu.U.ml.                                         : int  0 0 0 94 168 0 88 0 543 0 ...
  $ Body.mass.index..weight.in.kg..height.in.m..2.                          : num  33.6 26.6 23.3 28.1 43.1 25.6 31 35.3 30.5 0 ...
  $ Diabetes.pedigree.function                                              : num  0.627 0.351 0.672 0.167 2.288 ...
@@ -106,10 +107,11 @@ This is my statistical experimenting models using diabetes incidents
 > hist(diabetPima$mass)
 > ##The graphs show some of the distributions of the variables. Age and number of times pregnant are not normal distributions as expected since the underlying population should not be normally distributed either. This 392 observations are just a sample of the original population. On the other hand, the glucose level and BMI seem to follow a normal distribution. When performing any analysis, it is always good to know what is the distribution of the data so all the assumptions for different tests or models can be met.
 > 
-> par(mfrow = c(1, 2))
+       par(mfrow = c(1, 2))
 > 
 > # boxplot
-> with(diabetPima, boxplot(dpf ~ class, 
+       
+       with(diabetPima, boxplot(dpf ~ class, 
 +                          ylab = "Diabetes Pedigree Function", 
 +                          xlab = "Presence of Diabetes",
 +                          main = "Figure A",
@@ -117,8 +119,9 @@ This is my statistical experimenting models using diabetes incidents
 +                          outline = FALSE))
 > 
 > # subsetting based on response
-> with <- diabetPima[diabetPima$class == 1, ]
-> without <- diabetPima[diabetPima$class == 0, ]
+      
+       with <- diabetPima[diabetPima$class == 1, ]
+       without <- diabetPima[diabetPima$class == 0, ]
 > 
 > # density plot
 > plot(density(with$glucose), 
