@@ -2,12 +2,9 @@
 This is my statistical experimenting models using diabetes incidents
 ---
 title: "Statistics and ML techniques using diabetes incidents in Pima."
-      author: "Irina Max"
-      date: "November 16, 2016"
-      output:
-      html_document:
-      highlight: null
-      pdf_document: default
+author: "Irina Max"
+date: "November 16, 2016"
+
 ---
 
 
