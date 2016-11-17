@@ -10,7 +10,7 @@ This is my statistical experimenting models using diabetes incidents
 > 
 > # first look at the data set using summary() and str() to understand what type of data are you working
 > # with
-> summary(diabetPima)
+>     summary(diabetPima)
  Number.of.times.pregnant
  Min.   : 0.000          
  1st Qu.: 1.000          
