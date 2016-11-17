@@ -1,6 +1,6 @@
 # Statistica_of_diabetes
 This is my statistical experimenting models using diabetes incidents
-> #A first tryout with sharing a kernel on Kaggle using the data set available. I'll look 
+ ##A first tryout with sharing a kernel on Kaggle using the data set available. I'll look 
 > ##into exploring this data set, on forecasting the onset of diabetes in a population of 
 > ##Pima Indians using various tools in statistical learning. It'll mainly be logistic regression 
 > ##since the response output, with or without diabetes, is of a binary format (yes/no or true/false), and in this case, 1/0.
@@ -48,10 +48,9 @@ This is my statistical experimenting models using diabetes incidents
  Max.   :2.4200             Max.   :81.00   Max.   :1.000          
         str(diabetPima)
 'data.frame':	768 obs. of  9 variables:
- $ Number.of.times.pregnant                                                : int  6 1 8 1 0 5 3 10 2 8 ...
+ $ Number.of.times.pregnant : int  6 1 8 1 0 5 3 10 2 8 ...
  $ Plasma.glucose.concentration.a.2.hours.in.an.oral.glucose.tolerance.test: int  148 85 183 89 137 116 78 115 197 125 ...
- $ Diastolic.blood.pressure..mm.Hg.                                        : int  72 66 64 66 40 74 50 0 70 96 ...
- $ Triceps.skin.fold.thickness..mm.                                        : int  35 29 0 23 35 0 32 0 45 0 ...
+ $ Diastolic.blood.pressure..mm.Hg.: int  35 29 0 23 35 0 32 0 45 0 ...
  $ X2.Hour.serum.insulin..mu.U.ml.                                         : int  0 0 0 94 168 0 88 0 543 0 ...
  $ Body.mass.index..weight.in.kg..height.in.m..2.                          : num  33.6 26.6 23.3 28.1 43.1 25.6 31 35.3 30.5 0 ...
  $ Diabetes.pedigree.function                                              : num  0.627 0.351 0.672 0.167 2.288 ...
@@ -60,7 +59,7 @@ This is my statistical experimenting models using diabetes incidents
 > 
 > ##The summary shows the mean, quartile etc values of the variables if they are numeric. The Outcome variable is supposed to be a factor with two levels, 1 and 0 and we're going to change that later. And note that some of the variables carry 0 values which is not quite possible. E.g. it is not possible for someone's BMI or BloodPressure be 0. So there must be some problem with collection of the data and we're going to do some tidying of the data.
 > # modify the data columns names slightly for easier typing
-> names(diabetPima)
+       names(diabetPima)
 [1] "Number.of.times.pregnant"                                                
 [2] "Plasma.glucose.concentration.a.2.hours.in.an.oral.glucose.tolerance.test"
 [3] "Diastolic.blood.pressure..mm.Hg."                                        
