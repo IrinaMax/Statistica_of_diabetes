@@ -1,6 +1,6 @@
 # Statistica_of_diabetes
 This is my statistical experimenting models using diabetes incidents
-
+file://localhost/Users/irinamahmudjanova/Desktop/Pima_diabet/MD2.html
 ---
 title: "Statistics and ML techniques using diabetes incidents in Pima."
 author: "Irina Max"
