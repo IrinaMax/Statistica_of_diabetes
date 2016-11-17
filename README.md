@@ -1,14 +1,13 @@
 # Statistica_of_diabetes
 This is my statistical experimenting models using diabetes incidents
-file://localhost/Users/irinamahmudjanova/Desktop/Pima_diabet/MD2.html
 ---
 title: "Statistics and ML techniques using diabetes incidents in Pima."
-author: "Irina Max"
-date: "November 16, 2016"
-output:
-  html_document:
-    highlight: null
-  pdf_document: default
+      author: "Irina Max"
+      date: "November 16, 2016"
+      output:
+      html_document:
+      highlight: null
+      pdf_document: default
 ---
 
 
@@ -21,7 +20,59 @@ diabetPima <- read.csv("~/Desktop/Pima_diabet/Pima Indians Diabetes Binary Class
 first look at the data set using summary() and str() to understand what type of data are you working with
 ```{r}
 summary(diabetPima)
+##  Number.of.times.pregnant
+##  Min.   : 0.000          
+##  1st Qu.: 1.000          
+##  Median : 3.000          
+##  Mean   : 3.845          
+##  3rd Qu.: 6.000          
+##  Max.   :17.000          
+##  Plasma.glucose.concentration.a.2.hours.in.an.oral.glucose.tolerance.test
+##  Min.   :  0.0                                                           
+##  1st Qu.: 99.0                                                           
+##  Median :117.0                                                           
+##  Mean   :120.9                                                           
+##  3rd Qu.:140.2                                                           
+##  Max.   :199.0                                                           
+##  Diastolic.blood.pressure..mm.Hg. Triceps.skin.fold.thickness..mm.
+##  Min.   :  0.00                   Min.   : 0.00                   
+##  1st Qu.: 62.00                   1st Qu.: 0.00                   
+##  Median : 72.00                   Median :23.00                   
+##  Mean   : 69.11                   Mean   :20.54                   
+##  3rd Qu.: 80.00                   3rd Qu.:32.00                   
+##  Max.   :122.00                   Max.   :99.00                   
+##  X2.Hour.serum.insulin..mu.U.ml.
+##  Min.   :  0.0                  
+##  1st Qu.:  0.0                  
+##  Median : 30.5                  
+##  Mean   : 79.8                  
+##  3rd Qu.:127.2                  
+##  Max.   :846.0                  
+##  Body.mass.index..weight.in.kg..height.in.m..2. Diabetes.pedigree.function
+##  Min.   : 0.00                                  Min.   :0.0780            
+##  1st Qu.:27.30                                  1st Qu.:0.2437            
+##  Median :32.00                                  Median :0.3725            
+##  Mean   :31.99                                  Mean   :0.4719            
+##  3rd Qu.:36.60                                  3rd Qu.:0.6262            
+##  Max.   :67.10                                  Max.   :2.4200            
+##   Age..years.    Class.variable..0.or.1.
+##  Min.   :21.00   Min.   :0.000          
+##  1st Qu.:24.00   1st Qu.:0.000          
+##  Median :29.00   Median :0.000          
+##  Mean   :33.24   Mean   :0.349          
+##  3rd Qu.:41.00   3rd Qu.:1.000          
+##  Max.   :81.00   Max.   :1.000
 str(diabetPima)
+## 'data.frame':    768 obs. of  9 variables:
+##  $ Number.of.times.pregnant                                                : int  6 1 8 1 0 5 3 10 2 8 ...
+##  $ Plasma.glucose.concentration.a.2.hours.in.an.oral.glucose.tolerance.test: int  148 85 183 89 137 116 78 115 197 125 ...
+##  $ Diastolic.blood.pressure..mm.Hg.                                        : int  72 66 64 66 40 74 50 0 70 96 ...
+##  $ Triceps.skin.fold.thickness..mm.                                        : int  35 29 0 23 35 0 32 0 45 0 ...
+##  $ X2.Hour.serum.insulin..mu.U.ml.                                         : int  0 0 0 94 168 0 88 0 543 0 ...
+##  $ Body.mass.index..weight.in.kg..height.in.m..2.                          : num  33.6 26.6 23.3 28.1 43.1 25.6 31 35.3 30.5 0 ...
+##  $ Diabetes.pedigree.function                                              : num  0.627 0.351 0.672 0.167 2.288 ...
+##  $ Age..years.                                                             : int  50 31 32 21 33 30 26 29 53 54 ...
+##  $ Class.variable..0.or.1.                                                 : int  1 0 1 0 1 0 1 0 1 1 ...
 ```
 
 The summary shows the mean, quartile etc values of the variables if they are numeric. The Outcome variable is supposed to be a factor with two levels, 1 and 0 and we're going to change that later. And note that some of the variables carry 0 values which is not quite possible. E.g. it is not possible for someone's BMI or BloodPressure be 0. So there must be some problem with collection of the data and we're going to do some tidying of the data.
@@ -206,18 +257,25 @@ plot(fit.tree)
 text(fit.tree, pretty = 0)
 ```
 For some fitting methods, there are tuning parameters built into the model that compensate for the number of predictors added into the model during the fitting. These compensations prevent the model from over-fitting the training set data, and in certain ways optimize the bias-variance trade-off. These parameters can be adjusted using cross validation to allow the model to fit better to the data set. Thus, there are a lot more work to do then just running the data through all the default statistical learning methods.
-> 
->library("CHAID")
-> 
-> ### fit tree to subsample
-> diabetPima$preg <- factor(diabetPima$preg)
-> diabetPima$glucose <- factor(diabetPima$glucose)
-> diabetPima$blpress <- factor(diabetPima$blpress)
-> diabetPima$insul <- factor(diabetPima$insul)
-> diabetPima$mass <- factor(diabetPima$mass)
-> diabetPima$age <- factor(diabetPima$age)
-> diab.chaid <- diabetPima[sample(1:nrow(diabetPima), 100),]
-> chaid.diabetes <- chaid(age~ preg+ glucose + insul+ mass+ class,
-+ data = diabetPima)
->print(chaid.diabetes)
->plot(chaid.diabetes, main = "CHAID tree diabetes incidents classification")
+ 
+Finaly CHAID
+```{r}
+library("CHAID")
+
+### fit tree to subsample
+set.seed(100)
+
+diabetPima$preg <- factor(diabetPima$preg)
+diabetPima$glucose <- factor(diabetPima$glucose)
+diabetPima$blpress <- factor(diabetPima$blpress)
+diabetPima$insul <- factor(diabetPima$insul)
+diabetPima$mass <- factor(diabetPima$mass)
+diabetPima$age <- factor(diabetPima$age)
+
+chaid.diabetes <- chaid(age~ preg+ glucose + insul+ mass+ class, 
+                 data = diabetPima)
+print(chaid.diabetes)
+```
+```{r, echo=FALSE}
+plot(chaid.diabetes, main = "CHAID tree diabetes incidents classification")
+```
