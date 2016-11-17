@@ -72,7 +72,7 @@ str(diabetPima)
 ##  $ Class.variable..0.or.1.                                                 : int  1 0 1 0 1 0 1 0 1 1 ...
 ```
 
-The summary shows the mean, quartile etc values of the variables if they are numeric. The Outcome variable is supposed to be a factor with two levels, 1 and 0 and we're going to change that later. And note that some of the variables carry 0 values which is not quite possible. E.g. it is not possible for someone's BMI or BloodPressure be 0. So there must be some problem with collection of the data and we're going to do some tidying of the data.
+The summary shows the mean, quartile etc values of the variables if they are numeric. The Outcome variable is supposed to be a factor with two levels, 1 and 0 and we're going to change that later. And note that some of the variables carry 0 values which is not really good. So there must be some problem with collection of the data and I can delet all rows with 0, but then I loos half of the data and I am not really want to loos so much.
 
 
 ```{r}
