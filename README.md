@@ -323,8 +323,9 @@ For some fitting methods, there are tuning parameters built into the model that 
 Finaly CHAID
 ```{r}
 library("CHAID")
+### I need to factorize all variables I want to involve to the CHID tree.
 
-### fit tree to subsample
+### fit tree to subsample, coz it is easy to show tree construction on the sample
 set.seed(100)
 
 diabetPima$preg <- factor(diabetPima$preg)
