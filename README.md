@@ -343,3 +343,5 @@ print(chaid.diabetes)
 plot(chaid.diabetes, main = "CHAID tree diabetes incidents classification")
 ```
 ![chaid_age_all](https://cloud.githubusercontent.com/assets/16123495/20382660/a467298e-ac61-11e6-983d-a4783daa2812.png)
+
+WEKA acutally show very beautiful result and you can see the classifier J48 show 75% accuracy and made tree during 0.01sec.
